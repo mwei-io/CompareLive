@@ -1,0 +1,6 @@
+# 以下文件仅用于 GitHub 仓库展示/开发，不进入 Package Control 安装包
+# （GitHub 生成 tag 归档时遵守 export-ignore 规则）
+images/ export-ignore
+README_zh.md export-ignore
+README_en.md export-ignore
+.gitattributes export-ignore

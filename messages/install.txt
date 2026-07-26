@@ -1,0 +1,68 @@
+感谢安装 CompareLive！
+====================
+
+Sublime Text 实时差异对比插件：在独立新窗口中双窗格并排比较，
+编辑时实时刷新差异；行级 + 词级字符两层高亮，联动滚动，
+幽灵占位行视觉对齐，高亮颜色可配置。
+
+快速上手
+--------
+
+1. 至少打开两个标签
+2. 按 Ctrl+Shift+P（macOS：Cmd+Shift+P）打开命令面板，
+   运行「CompareLive: 与选定标签比较」
+3. 在快速面板中选择一个标签作为基准（左侧，只读），
+   当前标签作为比较侧（右侧，可编辑）
+4. 在右侧自由编辑，差异高亮实时刷新；滚动任意一侧，另一侧自动同步
+5. 结束时运行「CompareLive: 结束比较」（或直接关闭比较窗口）
+
+也可以通过编辑区右键菜单或标签页右键菜单发起比较。
+
+配置
+----
+
+通过 Preferences -> Package Settings -> CompareLive -> Settings 打开设置：
+
+- language      界面语言："zh_CN"（中文，默认）/ "en"（英文）
+- base_readonly 基准（左）窗格是否只读，默认 true
+- colors        自定义新增/删除/修改/字符高亮配色，修改后立即生效
+
+完整文档：https://github.com/mwei-io/CompareLive
+
+
+Thanks for installing CompareLive!
+==================================
+
+A live diff comparison plugin for Sublime Text: side-by-side
+two-pane comparison in a dedicated new window, with diffs refreshed
+in real time as you edit; two-layer line + word-level character
+highlighting, synchronized scrolling, ghost placeholder lines for
+visual alignment, and fully configurable highlight colors.
+
+Quick Start
+-----------
+
+1. Open at least two tabs
+2. Press Ctrl+Shift+P (macOS: Cmd+Shift+P) to open the Command
+   Palette and run "CompareLive: Compare with Selected Tab"
+3. Pick a tab in the quick panel as the base side (left, read-only);
+   the current tab becomes the compare side (right, editable)
+4. Edit freely on the right — highlights refresh live; scroll either
+   pane and the other follows automatically
+5. When done, run "CompareLive: End Compare" (or simply close the
+   compare window)
+
+You can also start a comparison from the editor context menu
+or the tab context menu.
+
+Configuration
+-------------
+
+Open settings via Preferences -> Package Settings -> CompareLive -> Settings:
+
+- language      UI language: "zh_CN" (Chinese, default) / "en" (English)
+- base_readonly Whether the base (left) pane is read-only, default true
+- colors        Custom added/removed/changed/character highlight
+                colors, applied immediately on change
+
+Full documentation: https://github.com/mwei-io/CompareLive
