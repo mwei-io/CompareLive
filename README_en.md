@@ -62,7 +62,6 @@ Press `Ctrl+Shift+P` and type:
 
 ### Option 2: Menu Bar
 
-- `Tools -> CompareLive -> Compare with Selected Tab / End Compare`
 - `Preferences -> Package Settings -> CompareLive -> Settings / End Current Compare`
 
 ### Option 3: Context Menus
@@ -136,7 +135,7 @@ CompareLive/
 ├── color_scheme.py              # Dynamic color scheme generator
 ├── CompareLive.sublime-settings # Plugin settings file
 ├── Default.sublime-commands     # Command palette definitions (auto-generated per language)
-├── Main.sublime-menu            # Main menu: Tools & Preferences entries (auto-generated)
+├── Main.sublime-menu            # Main menu: Preferences entry (auto-generated)
 ├── Context.sublime-menu         # Editor context menu (auto-generated)
 ├── Tab Context.sublime-menu     # Tab context menu (auto-generated)
 ├── *.sublime-color-scheme       # Highlight overlay named after the active color scheme (auto-generated)

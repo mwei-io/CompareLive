@@ -1019,19 +1019,6 @@ def _regenerate_menus():
                 }
             ],
         },
-        {
-            "id": "tools",
-            "children": [
-                {
-                    "caption": "CompareLive",
-                    "children": [
-                        {"caption": _t("menu.compare_with"), "command": "compare_live_compare_with"},
-                        {"caption": "-"},
-                        {"caption": _t("menu.end"), "command": "compare_live_end"},
-                    ],
-                }
-            ],
-        },
     ]
 
     # Default.sublime-commands
@@ -1056,10 +1043,20 @@ def _regenerate_menus():
 
 
 def _write_json(path, data):
-    """将数据序列化为 JSON 并写入文件。"""
+    """将数据序列化为 JSON 并写入文件；内容无变化时跳过写入。
+
+    避免每次启动都重写菜单文件，减少不必要的磁盘写入
+    与 Sublime Text 菜单重载（仅语言切换等内容变更时才落盘）。
+    """
+    text = json.dumps(data, ensure_ascii=False, indent=4) + "\n"
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            if f.read() == text:
+                return
+    except (OSError, ValueError):
+        pass  # 文件不存在或读取失败，直接重写
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-        f.write("\n")
+        f.write(text)
 
 
 # =============================================================================

@@ -11,8 +11,6 @@
     // 修改后自动生效 / Changes take effect immediately
     // 支持 #RGB / #RRGGBB / #RRGGBBAA 或 CSS 颜色写法
     // Supports #RGB / #RRGGBB / #RRGGBBAA or CSS color syntax
-    // 默认配色参考 IntelliJ IDEA Darcula 差异对比风格
-    // Default colors follow IntelliJ IDEA Darcula diff style
     "colors": {
         // 新增行背景(右侧-绿) / Added line background (right-green)
         "added_bg": "#2d4f34",

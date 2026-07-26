@@ -61,7 +61,6 @@ git clone https://github.com/<your-name>/CompareLive.git CompareLive
 
 ### 方式二：菜单栏
 
-- `Tools -> CompareLive -> 与选定标签比较 / 结束比较`
 - `Preferences -> Package Settings -> CompareLive -> Settings / 结束当前比较`
 
 ### 方式三：右键菜单
@@ -135,7 +134,7 @@ CompareLive/
 ├── color_scheme.py              # 动态颜色方案生成器
 ├── CompareLive.sublime-settings # 插件配置文件
 ├── Default.sublime-commands     # 命令面板命令定义（按语言自动生成）
-├── Main.sublime-menu            # 主菜单：Tools 与 Preferences 入口（自动生成）
+├── Main.sublime-menu            # 主菜单：Preferences 入口（自动生成）
 ├── Context.sublime-menu         # 编辑区右键菜单（自动生成）
 ├── Tab Context.sublime-menu     # 标签页右键菜单（自动生成）
 ├── *.sublime-color-scheme       # 高亮配色 overlay，与当前激活配色方案同名（自动生成）
