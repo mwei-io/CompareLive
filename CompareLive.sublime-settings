@@ -1,0 +1,28 @@
+{
+    // 界面语言 / UI Language
+    // "zh_CN" = 中文, "en" = English
+    "language": "zh_CN",
+
+    // 基准(左)窗格是否只读 / Whether the base (left) pane is read-only
+    // true: 左侧不可编辑 / Left side is not editable
+    "base_readonly": true,
+
+    // 自定义高亮配色 / Custom highlight colors
+    // 修改后自动生效 / Changes take effect immediately
+    // 支持 #RGB / #RRGGBB / #RRGGBBAA 或 CSS 颜色写法
+    // Supports #RGB / #RRGGBB / #RRGGBBAA or CSS color syntax
+    // 默认配色参考 IntelliJ IDEA Darcula 差异对比风格
+    // Default colors follow IntelliJ IDEA Darcula diff style
+    "colors": {
+        // 新增行背景(右侧-绿) / Added line background (right-green)
+        "added_bg": "#2d4f34",
+        // 删除行背景(左侧-红) / Removed line background (left-red)
+        "removed_bg": "#4b2e2e",
+        // 修改行整行背景(两侧-淡蓝) / Changed line background (both-light blue)
+        "changed_bg": "#384d65",
+        // 修改行内字符背景(两侧-亮蓝) / Changed char background (both-bright blue)
+        "changed_char_bg": "#4e6d8b",
+        // 前景色，留空则沿用编辑器默认 / Foreground, empty = editor default
+        "foreground": ""
+    }
+}

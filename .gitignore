@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.idea/
+package-metadata.json
+
+# 插件加载时自动生成的文件
+Default.sublime-commands
+*.sublime-menu
+*.sublime-color-scheme
