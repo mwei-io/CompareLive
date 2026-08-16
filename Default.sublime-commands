@@ -1,0 +1,18 @@
+[
+    {
+        "caption": "CompareLive: Compare with Selected Tab",
+        "command": "compare_live_compare_with"
+    },
+    {
+        "caption": "CompareLive: End Compare",
+        "command": "compare_live_end"
+    },
+    {
+        "caption": "Preferences: CompareLive Settings",
+        "command": "edit_settings",
+        "args": {
+            "base_file": "${packages}/CompareLive/CompareLive.sublime-settings",
+            "default": "{\n\t$0\n}\n"
+        }
+    }
+]

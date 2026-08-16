@@ -3,8 +3,8 @@ import sublime_plugin
 import os
 import json
 
-from . import diff_engine
-from . import color_scheme
+from .lib import diff_engine
+from .lib import color_scheme
 
 # 设置文件名
 SETTINGS_FILE = "CompareLive.sublime-settings"

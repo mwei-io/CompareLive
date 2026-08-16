@@ -1,0 +1,33 @@
+[
+    {
+        "id": "preferences",
+        "children": [
+            {
+                "id": "package-settings",
+                "caption": "Package Settings",
+                "children": [
+                    {
+                        "caption": "CompareLive",
+                        "children": [
+                            {
+                                "caption": "Settings",
+                                "command": "edit_settings",
+                                "args": {
+                                    "base_file": "${packages}/CompareLive/CompareLive.sublime-settings",
+                                    "default": "{\n\t$0\n}\n"
+                                }
+                            },
+                            {
+                                "caption": "-"
+                            },
+                            {
+                                "caption": "End Current Compare",
+                                "command": "compare_live_end"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

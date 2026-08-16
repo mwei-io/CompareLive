@@ -4,6 +4,6 @@ __pycache__/
 package-metadata.json
 
 # 插件加载时自动生成的文件
-Default.sublime-commands
-*.sublime-menu
+Context.sublime-menu
+Tab Context.sublime-menu
 *.sublime-color-scheme
