@@ -968,8 +968,14 @@ class CompareLiveListener(sublime_plugin.EventListener):
 # 菜单生成
 # =============================================================================
 def _regenerate_menus():
-    """根据当前语言配置重新生成所有菜单和命令面板文件。"""
-    pkg_dir = os.path.dirname(__file__)
+    """根据当前语言配置重新生成所有菜单和命令面板文件。
+
+    文件写入 sublime.cache_path() 下的 CompareLive 目录，同名资源会
+    覆盖包内随附的英文默认版；cache 目录始终可写，zip 安装模式
+    （.sublime-package）下同样有效。
+    """
+    pkg_dir = os.path.join(sublime.cache_path(), "CompareLive")
+    os.makedirs(pkg_dir, exist_ok=True)
 
     # Context.sublime-menu
     context_menu = [

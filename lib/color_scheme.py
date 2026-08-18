@@ -2,8 +2,8 @@ import os
 import json
 import sublime
 
-# 插件目录
-PKG_DIR = os.path.dirname(__file__)
+# 运行时可写的资源目录（位于 cache 目录下，zip 安装模式同样有效，同名资源会覆盖包内随附文件）
+PKG_DIR = os.path.join(sublime.cache_path(), "CompareLive")
 
 # 各高亮 scope 与其对应的设置键映射表
 _SCOPE_MAP = [
@@ -90,6 +90,9 @@ def _cleanup_old_overlay(exclude_name=None):
     通过读取文件内容中的特征字段判断是否为本插件生成。
     """
     global _current_overlay_name
+    if not os.path.isdir(PKG_DIR):
+        _current_overlay_name = exclude_name
+        return
     for f in os.listdir(PKG_DIR):
         if not f.endswith(".sublime-color-scheme"):
             continue
@@ -139,6 +142,7 @@ def generate(colors, force=False):
     content = json.dumps(scheme, ensure_ascii=False, indent=4)
 
     path = os.path.join(PKG_DIR, target_name)
+    os.makedirs(PKG_DIR, exist_ok=True)
 
     # 非强制模式下，内容相同则跳过
     if not force:
