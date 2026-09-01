@@ -977,28 +977,28 @@ def _regenerate_menus():
     pkg_dir = os.path.join(sublime.cache_path(), "CompareLive")
     os.makedirs(pkg_dir, exist_ok=True)
 
-    # Context.sublime-menu
-    context_menu = [
-        {"caption": "-", "id": "compare_live_sep_before"},
-        {
-            "caption": "CompareLive",
-            "children": [
-                {"caption": _t("menu.compare_with"), "command": "compare_live_compare_with"},
-                {"caption": "-"},
-                {"caption": _t("menu.end"), "command": "compare_live_end"},
-            ],
-        },
-        {"caption": "-", "id": "compare_live_sep_after"},
-    ]
-
-    # Tab Context.sublime-menu
-    tab_menu = [
-        {"caption": "-", "id": "compare_live_tab_sep"},
-        {"caption": "CompareLive", "command": "compare_live_compare_with"},
-    ]
-
     # Main.sublime-menu
     main_menu = [
+        {
+            "id": "tools",
+            "children": [
+                {
+                    "caption": "-",
+                    "id": "compare_live_tools_sep_top"
+                },
+                {
+                    "caption": "CompareLive",
+                    "children": [
+                        {"caption": _t("menu.compare_with"), "command": "compare_live_compare_with"},
+                        {"caption": _t("menu.end"), "command": "compare_live_end"},
+                    ],
+                },
+                {
+                    "caption": "-",
+                    "id": "compare_live_tools_sep_bottom"
+                }
+            ],
+        },
         {
             "id": "preferences",
             "children": [
@@ -1017,8 +1017,6 @@ def _regenerate_menus():
                                         "default": "{\n\t$0\n}\n",
                                     },
                                 },
-                                {"caption": "-"},
-                                {"caption": _t("menu.end_current"), "command": "compare_live_end"},
                             ],
                         }
                     ],
@@ -1041,11 +1039,28 @@ def _regenerate_menus():
         },
     ]
 
+    # Context.sublime-menu
+    context_menu = [
+        {
+            "caption": "CompareLive",
+            "children": [
+                {"caption": _t("menu.compare_with"), "command": "compare_live_compare_with"},
+                {"caption": _t("menu.end"), "command": "compare_live_end"},
+            ],
+        },
+    ]
+
+    # Tab Context.sublime-menu
+    tab_menu = [
+        {"caption": "-", "id": "compare_live_tab_sep"},
+        {"caption": "CompareLive", "command": "compare_live_compare_with"},
+    ]
+
     # 写入文件
-    _write_json(os.path.join(pkg_dir, "Context.sublime-menu"), context_menu)
-    _write_json(os.path.join(pkg_dir, "Tab Context.sublime-menu"), tab_menu)
     _write_json(os.path.join(pkg_dir, "Main.sublime-menu"), main_menu)
     _write_json(os.path.join(pkg_dir, "Default.sublime-commands"), commands)
+    _write_json(os.path.join(pkg_dir, "Context.sublime-menu"), context_menu)
+    _write_json(os.path.join(pkg_dir, "Tab Context.sublime-menu"), tab_menu)
 
 
 def _write_json(path, data):
@@ -1110,10 +1125,27 @@ def plugin_loaded():
     1. 生成与当前 color scheme 同名的 overlay 文件
     2. 根据语言配置生成菜单文件
     3. 注册设置变更监听（CompareLive 设置 + 全局 Preferences）
+    4. 隐藏静态菜单文件，避免命令面板重复显示
     """
     cfg = get_config()
     color_scheme.generate(cfg["colors"])
     _regenerate_menus()
+    
+    # 隐藏静态菜单文件：将 Default.sublime-commands 和 Main.sublime-menu 重命名为 .disabled
+    # 避免命令面板同时显示中英文两个版本
+    pkg_dir = sublime.packages_path()
+    static_commands_file = os.path.join(pkg_dir, "CompareLive", "Default.sublime-commands")
+    static_main_menu = os.path.join(pkg_dir, "CompareLive", "Main.sublime-menu")
+    disabled_commands_file = static_commands_file + ".disabled"
+    disabled_main_menu = static_main_menu + ".disabled"
+    
+    try:
+        if os.path.exists(static_commands_file) and not os.path.exists(disabled_commands_file):
+            os.rename(static_commands_file, disabled_commands_file)
+        if os.path.exists(static_main_menu) and not os.path.exists(disabled_main_menu):
+            os.rename(static_main_menu, disabled_main_menu)
+    except Exception as e:
+        print(f"[CompareLive] 无法禁用静态菜单文件：{e}")
 
     # 监听本插件设置变更
     s = sublime.load_settings(SETTINGS_FILE)
@@ -1133,6 +1165,7 @@ def plugin_unloaded():
     1. 移除设置变更监听
     2. 结束所有活跃的比较会话
     3. 清理生成的 overlay 文件
+    4. 恢复静态菜单文件（如果存在）
     """
     s = sublime.load_settings(SETTINGS_FILE)
     s.clear_on_change("compare_live")
@@ -1152,3 +1185,18 @@ def plugin_unloaded():
                 _clear_view_marks(view)
             _clear_phantoms(sess)
     _sessions.clear()
+    
+    # 恢复静态菜单文件（如果曾经被禁用）
+    pkg_dir = sublime.packages_path()
+    static_commands_file = os.path.join(pkg_dir, "CompareLive", "Default.sublime-commands")
+    static_main_menu = os.path.join(pkg_dir, "CompareLive", "Main.sublime-menu")
+    disabled_commands_file = static_commands_file + ".disabled"
+    disabled_main_menu = static_main_menu + ".disabled"
+    
+    try:
+        if os.path.exists(disabled_commands_file) and not os.path.exists(static_commands_file):
+            os.rename(disabled_commands_file, static_commands_file)
+        if os.path.exists(disabled_main_menu) and not os.path.exists(static_main_menu):
+            os.rename(disabled_main_menu, static_main_menu)
+    except Exception as e:
+        print(f"[CompareLive] 无法恢复静态菜单文件：{e}")

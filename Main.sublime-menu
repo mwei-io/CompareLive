@@ -1,5 +1,31 @@
 [
     {
+        "id": "tools",
+        "children": [
+            {
+                "caption": "-",
+                "id": "compare_live_tools_sep_top"
+            },
+            {
+                "caption": "CompareLive",
+                "children": [
+                    {
+                        "caption": "with Selected Tab",
+                        "command": "compare_live_compare_with"
+                    },
+                    {
+                        "caption": "End Compare",
+                        "command": "compare_live_end"
+                    }
+                ]
+            },
+            {
+                "caption": "-",
+                "id": "compare_live_tools_sep_bottom"
+            }
+        ]
+    },
+    {
         "id": "preferences",
         "children": [
             {
@@ -16,13 +42,6 @@
                                     "base_file": "${packages}/CompareLive/CompareLive.sublime-settings",
                                     "default": "{\n\t$0\n}\n"
                                 }
-                            },
-                            {
-                                "caption": "-"
-                            },
-                            {
-                                "caption": "End Current Compare",
-                                "command": "compare_live_end"
                             }
                         ]
                     }
